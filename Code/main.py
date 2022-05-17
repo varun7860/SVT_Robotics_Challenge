@@ -1,13 +1,12 @@
-from urllib import robotparser
+#from urllib import robotparser
 import requests
-import json
 import math
 import numpy as np
 import random
 
 class SvtBot(object):
     def __init__(self):
-        
+
         #API Endpoint Urls
         self.API_URL_1 = "https://60c8ed887dafc90017ffbd56.mockapi.io/robots"
         self.API_URL_2 = "https://svtrobotics.free.beeceptor.com/robots"
@@ -49,7 +48,7 @@ class SvtBot(object):
     def find_highest_battery_level_robot(distances:list,battery_levels:list)-> int:
          batteries = []
          index = []
-         print(distances)
+         #print(distances)
 
          for k in range(len(distances)):
             if distances[k] <= 10.0:
@@ -129,7 +128,7 @@ class SvtBot(object):
         d_to_goal = distance[robot_num]
         battery_level = ideal_robot.get('batteryLevel')
 
-        print({'robotId': id,'distanceToGoal': d_to_goal,'batteryLevel': battery_level})
+        #print({'robotId': id,'distanceToGoal': d_to_goal,'batteryLevel': battery_level})
 
         return {'robotId': id,'distanceToGoal': d_to_goal,'batteryLevel': battery_level}
 
