@@ -23,6 +23,9 @@ I have used python language for coding the functions.I have also used additional
 4.Random Library - To Randomly Generate Load id and Its position
 - ```pip3 install random```
 
+I have made a requirements.txt file which you can use to install all these commands with one go like this
+- ```pip3 install r-requirements.txt```
+
 ## My Solution
 
 ## Instructions for Running the Program
