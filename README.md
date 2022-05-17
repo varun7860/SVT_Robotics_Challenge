@@ -48,7 +48,7 @@ For my solution I made a class called SVTBot that contains all the necessary fun
 4. The function calculates the distance of each robot from the load and then with help of that distance and battery levels finds the best robot that can transport the load.
 5. Finally the output is displayed as per the requirements.
 
-## Instructions for Running the Program
+## Instructions for Running and Testing the Program
 The repository contains a folder called code which has the main function program. Other files in the repository are README.md which contains the instructions to run the program and testing it. Following is the structure of the repository:
 
 SVT_Robotics Challege
@@ -58,8 +58,12 @@ SVT_Robotics Challege
 To run the program go to the folder where the python program is saved and then run the python file. Given below are the steps to execute the program:
 
 1. ```cd ~/SVT_Robotics_Challenge/Code```
-2. ```Python3 main.py```
+2. ```python3 main.py```
 
+To test the program go the Unit_Tests Folder and run the program unit_tests.py. The unit test program checks for python version, installations and the distance calculation function. If all goes correct you should't see any error and program should execute with no output. If something is missing assertion error will be displayed in the terminal.
+
+1. ```cd ~/SVT_Robotics_Challenge/Unit_Tests```
+2. ```python3 unit_tests.py```
 
 ## What Next?
 
