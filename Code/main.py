@@ -14,13 +14,17 @@ class SvtBot(object):
         #Get API Data
         try:
            self.API_DATA = requests.get(self.API_URL_1)
-        except:
-           print("API 1 Failed")
+        except Exception as e:
+           print(e)
+           self.API_DATA = requests.get(self.API_URL_2)
+        finally:
+            if self.API_DATA.status_code == 200:
+                print("Data Extracted Successfully")
+
+            else:
+                print("Error : Issue with Data Extraction")
 
         self.API_DATA = self.API_DATA.json()
-        robot_1 = self.API_DATA[0]
-        id = robot_1.get('robotId')
-        print(id)
 
         #Robot data
         self.id = None
@@ -32,6 +36,32 @@ class SvtBot(object):
         distance = math.sqrt(pow((x2-x1),2) + pow((y2-y1),2))
         return distance
 
+    @staticmethod
+    def get_random_payload():
+        x = random.randrange(1,100,2)
+        y = random.randrange(1,100,2)
+        payload_id = str(random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
+
+        return x,y,payload_id
+
+    @staticmethod
+    def find_highest_battery_level_robot(distances:list,battery_levels:list)-> int:
+         batteries = []
+         index = []
+         print(distances)
+
+         for k in range(len(distances)):
+            if distances[k] <= 10.0:
+                batteries.append(battery_levels[k])
+                index.append(k)
+
+            else:
+                pass
+
+         print(batteries)
+         return index[np.argmax(batteries)]
+                
+
     def get_robot_params(self,index):
         robot = self.API_DATA[index]
         id = robot.get('robotId')
@@ -40,14 +70,7 @@ class SvtBot(object):
         x = robot.get('x')
         return id,battery,y,x
 
-    def get_random_payload():
-        x = random()
-        y = random()
-        payload_id = str(random())
-
-        return x,y,payload_id
-
-    def get_find_robot(self,x_load:float,y_load:float,load_id:str)-> dict:
+    def find_robot(self,x_load:float,y_load:float,load_id:str)-> dict:
         distance = []
         battery_levels = []
         ids = []
@@ -62,7 +85,7 @@ class SvtBot(object):
             append ids
             '''
             id,battery,y1,x1 = self.get_robot_params(i)
-            d = self.calculate_distance(x1,x_load,y1,y_load)
+            d = round(self.calculate_distance(x1,x_load,y1,y_load),2)
             distance.append(d)
             battery_levels.append(battery)
             ids.append(id)
@@ -74,17 +97,23 @@ class SvtBot(object):
 
         for j in range(len(distance)):
 
-            if counter > 1:
-                break
-
             if distance[j]<=10:
+
+                if counter > 1:
+                   robot_num = self.find_highest_battery_level_robot(distance,battery_levels)
+                   break
+
                 counter += 1
 
-        robot_num = np.argmax(battery_levels)
+            else:
+                robot_num = np.argmin(distance)
+
         ideal_robot = self.API_DATA[robot_num]
         id = ideal_robot.get('robotId')
         d_to_goal = distance[robot_num]
         battery_level = ideal_robot.get('batteryLevel')
+
+        print({'robotId': id,'distanceToGoal': d_to_goal,'batteryLevel': battery_level})
 
         return {'robotId': id,'distanceToGoal': d_to_goal,'batteryLevel': battery_level}
 
@@ -94,10 +123,10 @@ def main():
     bot = SvtBot()
 
     #Get a random payload config
-    #x,y,payload_id = bot.get_random_payload()
+    x,y,payload_id = bot.get_random_payload()
 
     #Find the ideal robot that can pick up the payload
-    #robot_id,dis_to_goal,battery_level = bot.get_robot_id(x,y,payload_id)
+    robot_id,dis_to_goal,battery_level = bot.find_robot(x,y,payload_id)
 
     #Display the output
     #print("The ideal robot to pick the payload:",robot_id,dis_to_goal,battery_level)
