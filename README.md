@@ -26,7 +26,21 @@ I have used python language for coding the functions.I have also used additional
 I have made a requirements.txt file which you can use to install all these commands with one go like this
 - ```pip3 install -r requirements.txt```
 
-## My Solution
+## My Solution and Documentation
+For my solution I made a class called SVTBot that contains all the necessary functions to find the best robot that can pick up load. Given below is a overview of all the functions that I have made within SVTBot Class:
+
+1. get_random_load(args:None): This function generates a random load and returns its id and position(x,y). x,y and id are generated randomly using the random library in python.
+
+2. remove_zero_battery_level(args:None): This function removes the robots with zero battery level as they are of no use to pick up and transport the load without a battery. It reads API data and then finds out the robot with zero battery level.
+
+3. get_robot_params(args:None): This function finds the robot's id,battery level, its x and y coordinates and then returns them. It reads API data to get these parameters of the robot.
+
+4. calculate_distance(x1,x2,y1,y2): This function calculates the distance between the robot and load.Here (x1,y1) is the robot's position and (x2,y2) is the load's position. It calculates the distance using distance formula sqrt((x2-x1)^2 + (y2-y1)^2 and then returns it.
+
+5. find_highest_battery_level_robot(distances,batteries): This function calculates the highest battery level robot when more than 1 robot lies within 10 distance units. It takes list of distances and battery leves as an argument and returns the index of robot which has highest battery level.
+
+6. find_robot(x,y,id): This function takes the load (x,y,id) as an argument and returns the robot (id,distance_to_goal,battery level) thats best to transport the load.(closest to load and has decent battery level). If there are more than 1 robot within 10 distance units it returns the robot with highest battery level.
+
 
 ## Instructions for Running the Program
 The repository contains a folder called code which has the main function program. Other files in the repository are README.md which contains the instructions to run the program and testing it. Following is the structure of the repository:
