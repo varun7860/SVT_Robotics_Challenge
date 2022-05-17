@@ -18,13 +18,13 @@ I have used python language for coding the functions.I have also used additional
 - ```pip3 install requests```
 
 3.Math Library - To perform Math Operations
-- ```pip3 install math```
+- ```pip3 install python-math```
 
 4.Random Library - To Randomly Generate Load id and Its position
-- ```pip3 install random```
+- ```pip3 install random2```
 
 I have made a requirements.txt file which you can use to install all these commands with one go like this
-- ```pip3 install r-requirements.txt```
+- ```pip3 install -r requirements.txt```
 
 ## My Solution
 
