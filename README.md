@@ -41,6 +41,12 @@ For my solution I made a class called SVTBot that contains all the necessary fun
 
 6. find_robot(x,y,id): This function takes the load (x,y,id) as an argument and returns the robot (id,distance_to_goal,battery level) thats best to transport the load.(closest to load and has decent battery level). If there are more than 1 robot within 10 distance units it returns the robot with highest battery level.
 
+## Approach
+Step 1: I first get the data from API Endpoint using HTTP Request.
+Step 2: After getting the data the program remove all the robots which have zero battery levels.
+Step 3: After that the program generates random load configuration and feeds it to the function which find the robot for transporting that load.
+Step 4: The function calculates the distance of each robot from the load and then with help of that distance and battery levels finds the best robot that can transport the load.
+Step 5: Finally the output is displayed as per the requirements.
 
 ## Instructions for Running the Program
 The repository contains a folder called code which has the main function program. Other files in the repository are README.md which contains the instructions to run the program and testing it. Following is the structure of the repository:
