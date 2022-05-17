@@ -11,7 +11,7 @@ class SvtBot(object):
         self.API_URL_1 = "https://60c8ed887dafc90017ffbd56.mockapi.io/robots"
         self.API_URL_2 = "https://svtrobotics.free.beeceptor.com/robots"
 
-        #Get API Data
+        #Get API Data using HTTP Request
         try:
            self.API_DATA = requests.get(self.API_URL_1)
         except Exception as e:
@@ -61,6 +61,17 @@ class SvtBot(object):
          print(batteries)
          return index[np.argmax(batteries)]
                 
+    def remove_zero_battery_level(self):
+        counter = 0
+        for p in range(len(self.API_DATA)):
+            robot = self.API_DATA[p]
+            battery = robot.get('batteryLevel')
+            if battery == 0:
+                self.API_DATA.pop(p)
+                counter+=1
+            if p == len(self.API_DATA)-counter:
+                break
+                
 
     def get_robot_params(self,index):
         robot = self.API_DATA[index]
@@ -71,10 +82,14 @@ class SvtBot(object):
         return id,battery,y,x
 
     def find_robot(self,x_load:float,y_load:float,load_id:str)-> dict:
+
         distance = []
         battery_levels = []
         ids = []
         counter = 0
+
+        #Remove Zero Battery Level Robots
+        self.remove_zero_battery_level()
 
         for i in range(len(self.API_DATA)):
             '''
@@ -126,12 +141,11 @@ def main():
     x,y,payload_id = bot.get_random_payload()
 
     #Find the ideal robot that can pick up the payload
-    robot_id,dis_to_goal,battery_level = bot.find_robot(x,y,payload_id)
+    robot = bot.find_robot(x,y,payload_id)
 
     #Display the output
-    #print("The ideal robot to pick the payload:",robot_id,dis_to_goal,battery_level)
+    print("The ideal robot to pick the payload:",robot)
 
     
-
 if __name__ == '__main__':
     main()

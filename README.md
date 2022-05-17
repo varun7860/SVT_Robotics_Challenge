@@ -28,8 +28,18 @@ I have made a requirements.txt file which you can use to install all these comma
 
 ## My Solution
 
-
 ## Instructions for Running the Program
+The repository contains a folder called code which has the main function program. Other files in the repository are README.md which contains the instructions to run the program and testing it. Following is the structure of the repository:
+
+SVT_Robotics Challege
+- Code
+- README.md
+
+To run the program go to the folder where the python program is saved and then run the python file. Given below are the steps to execute the program:
+
+1. ```cd ~/SVT_Robotics_Challenge/Code```
+2. ```Python3 main.py```
+
 
 ## What Next?
 
