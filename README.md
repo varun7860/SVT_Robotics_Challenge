@@ -12,16 +12,16 @@ Problem Statement: Make a function that takes 3 input arguments loadId,X,Y of th
 I have used python language for coding the functions.I have also used additional libraries that can perform HTTP Request, Performing mathematical functions and performing array operations. Below are the instructions to install those libraries:
 
 1.Numpy Library - To Perform Array Operations
-```pip3 install numpy```
+- ```pip3 install numpy```
 
 2.Requests Library - To perform HTTP Request
-```pip3 install requests```
+- ```pip3 install requests```
 
 3.Math Library - To perform Math Operations
-```pip3 install math```
+- ```pip3 install math```
 
 4.Random Library - To Randomly Generate Load id and Its position
-```pip3 install random```
+- ```pip3 install random```
 
 ## My Solution
 
