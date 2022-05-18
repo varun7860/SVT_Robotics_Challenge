@@ -69,5 +69,3 @@ To test the program go the Unit_Tests Folder and run the program unit_tests.py. 
 2. ```python3 unit_tests.py```
 
 ## What Next?
-
-![node_graph](Asset/example.png)
