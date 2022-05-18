@@ -69,4 +69,15 @@ To test the program go the Unit_Tests Folder and run the program unit_tests.py. 
 2. ```python3 unit_tests.py```
 
 ## What Next?
+1. The method of finding robot based on its battery level and distance to transport the load is good but not accurate and is slow.Time is equally important when there are lot of tasks to complete and plays an important role in analyzing robot's performance. Consider the image below:
 ![node_graph](Asset/Example.png)
+
+Here suppose R1 robot has battery level as 84,distance of 8.08 units and R2 has distance 8.15, battery level as 73. what shpuld be the output according to the logic above? The program will output R1 Robot as the ideal robot for transporting load as both lie within 10 units and R1 has more battery level. But lets look closely now. In front of R1 there lie some obstructions which doesn't let R1 travel directly to the goal even though its seems quite near. This will make R1 travel longer path compared to R2. Basically the path for R1 has more cost than R2. Here the right robot to choose will be R2 as the path of R2 has lowest cost plus it will save a lots of time. 
+
+To overcome this we can add additional output parameter as cost which will be calculated using planning algorithm and considering distance, cost and battery level take the decision accordingly.Also we should also associate battery level with how much distance robot has to travel to pick, place the goal as well as check if the battery level is sufficient or not for the robot to accomplish the task. For experimenting I will add 1 battery level === 1 unit distance.
+
+This solution will save lots of time and make the function. more accurate.
+
+2. Also apart from implementing additional parameters I would also to make a visualizer that will be more useful for debugging and testing. All the api endpoint data will be used and with the help of that I will make 2D simulation of robot and load positions on xy plane. It will look very similar to picture above. I will make the visualizer in pygame library in python.
+
+3. I would also like to implement a camera feed on top so that it gets a clear picture of where robots are now in their warehouse. This would help in local testing or in situations when the connection to internet is disrupted. With the help of vision we can detect where all the robots are in the warehouse.By doing this I will get all the robot's parameters.
