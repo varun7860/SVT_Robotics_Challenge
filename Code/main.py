@@ -1,5 +1,5 @@
-#from urllib import robotparser
 import requests
+import json
 import math
 import numpy as np
 import random
@@ -10,21 +10,26 @@ class SvtBot(object):
         #API Endpoint Urls
         self.API_URL_1 = "https://60c8ed887dafc90017ffbd56.mockapi.io/robots"
         self.API_URL_2 = "https://svtrobotics.free.beeceptor.com/robots"
+        self.connected = False
 
         #Get API Data using HTTP Request
         try:
            self.API_DATA = requests.get(self.API_URL_1)
+           self.API_DATA = self.API_DATA.json()
+           self.connected = True
+           
         except Exception as e:
-           print(e)
-           self.API_DATA = requests.get(self.API_URL_2)
+           self.connected = False
+           data = open("robots.json")
+           self.API_DATA = json.load(data)
+    
         finally:
-            if self.API_DATA.status_code == 200:
-                print("Data Extracted Successfully")
+            if self.connected == True:
+                print("\033[33m" + "Program operating under stable internet connection")
 
             else:
-                print("Error : Issue with Data Extraction")
+                print("\033[33m" + "Program Operating Locally as there is no Internet Connection")
 
-        self.API_DATA = self.API_DATA.json()
 
         #Robot data
         self.id = None
@@ -48,7 +53,6 @@ class SvtBot(object):
     def find_highest_battery_level_robot(distances:list,battery_levels:list)-> int:
          batteries = []
          index = []
-         #print(distances)
 
          for k in range(len(distances)):
             if distances[k] <= 10.0:
@@ -58,7 +62,6 @@ class SvtBot(object):
             else:
                 pass
 
-         print(batteries)
          return index[np.argmax(batteries)]
                 
     def remove_zero_battery_level(self):
@@ -71,7 +74,6 @@ class SvtBot(object):
                 counter+=1
             if p == len(self.API_DATA)-counter:
                 break
-                
 
     def get_robot_params(self,index):
         robot = self.API_DATA[index]
@@ -132,6 +134,9 @@ class SvtBot(object):
 
         return {'robotId': id,'distanceToGoal': d_to_goal,'batteryLevel': battery_level}
 
+    def __del__(self):
+        print("\033[39m"+"Program Finished Executing")
+
 
 def main():
     #create the SvtBot Object
@@ -144,7 +149,7 @@ def main():
     robot = bot.find_robot(x,y,payload_id)
 
     #Display the output
-    print("The ideal robot to pick the payload:",robot)
+    print("\033[32m" + "The best robot:",robot)
 
     
 if __name__ == '__main__':
