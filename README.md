@@ -69,9 +69,9 @@ To test the program go the Unit_Tests Folder and run the program unit_tests.py. 
 2. ```python3 unit_tests.py```
 
 ## What Next?
-1. ![node_graph](Asset/Example.png)
+![node_graph](Asset/Example.png)
 
-The method of finding robot based on its battery level and distance to transport the load is good but not accurate and is slow.Time is equally important when there are lot of tasks to complete and plays an important role in analyzing robot's performance. Consider the image above:
+1. The method of finding robot based on its battery level and distance to transport the load is good but not accurate and is slow.Time is equally important when there are lot of tasks to complete and plays an important role in analyzing robot's performance. Consider the image above:
 
 Here suppose R1 robot has battery level as 84,distance of 8.08 units and R2 has distance 8.15, battery level as 73. what shpuld be the output according to the logic above? The program will output R1 Robot as the ideal robot for transporting load as both lie within 10 units and R1 has more battery level. But lets look closely now. In front of R1 there lie some obstructions which doesn't let R1 travel directly to the goal even though its seems quite near. This will make R1 travel longer path compared to R2. Basically the path for R1 has more cost than R2. Here the right robot to choose will be R2 as the path of R2 has lowest cost plus it will save a lots of time. 
 
