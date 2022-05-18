@@ -56,9 +56,14 @@ The repository contains a folder called code which has the main function program
 
 SVT_Robotics Challege
 - Code
+  - main.py
+  - robots.json
 - Unit Tests
+  - unit_test.py
 - Assets
+  -Example.png
 - README.md
+- requirements.txt
 
 To run the program go to the folder where the python program is saved and then run the python file. Given below are the steps to execute the program:
 
